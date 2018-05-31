@@ -5,4 +5,4 @@ DevOps teste Integração (Git,CodeAnyWhere,Travis CI,Heroku)
 
 App test : http://devopsjef.herokuapp.com
 
-Curso Oferecido por 4Linux : 
+Curso Oferecido por 4Linux : https://www.4linux.com.br/curso/devops-essentials
