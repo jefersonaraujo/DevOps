@@ -105,11 +105,11 @@ docker cp <nome_container>:/caminho/no/container /caminho/no/host
 root@docker:/home/docker# docker ps
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                  NAMES
 f8d74ee7155a        7e616530e7ea        "/bin/bash"         12 minutes ago      Up 12 minutes       0.0.0.0:8080->80/tcp   lonely_mccarthy
-root@black:/home/sidnei#
+root@docker:/home/docker#
 
-root@black:/home/sidnei# docker commit f8d74ee7155a debian-apache
+root@docker:/home/docker# docker commit f8d74ee7155a debian-apache
 sha256:9a232ff09aaf601dfbe487c3b20802079cd5e1a55115fb3a47473f9e44ab8bf0
-root@black:/home/sidnei# docker images
+root@docker:/home/docker# docker images
 REPOSITORY            TAG                 IMAGE ID            CREATED             SIZE
 debian-apache         latest              9a232ff09aaf        4 seconds ago       226.9 MB
 ```
@@ -153,12 +153,12 @@ volumes:
 
 #### Subindo duas imagens Wordpress e Mysql e as linkando
 ```shell
-docker run -d --name=dbserver -e "MYSQL_ROOT_PASSWD=bolacha" -e "MYSQL_DATABASE=wordpress" mysql
+docker run -d --name=dbserver -e "MYSQL_ROOT_PASSWD=senha" -e "MYSQL_DATABASE=wordpress" mysql
 docker run -d --name=wordpress -p 80:80 --link dbserver:mysql wordpress
 ```
 
 #### Upando imagens para Docker Hub
 ```shell
 docker tag debian-apache:v2 usuario/servidorweb:v1
-docker push sidneiweber/web:v1
+docker push usuario/web:v1
 ```
