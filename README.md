@@ -162,3 +162,11 @@ docker run -d --name=wordpress -p 80:80 --link dbserver:mysql wordpress
 docker tag debian-apache:v2 usuario/servidorweb:v1
 docker push usuario/web:v1
 ```
+#### Erro Ubuntu 16
+Caso apareceça o erro : "WARNING: Your kernel does not support swap limit capabilities or the cgroup is not mounted. Memory limited without swap." Tnte:
+```shell
+vi /etc/default/grub
+Adicione a linha : GRUB_CMDLINE_LINUX="cgroup_enable=memory swapaccount=1"
+sudo update-grub
+```
+
