@@ -1,1 +1,7 @@
 version: '3.4'
+services:
+    app:
+    image: microsoft/iis
+    container_name: app
+    ports:
+          - 80:80
