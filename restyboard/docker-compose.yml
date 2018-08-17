@@ -1,0 +1,26 @@
+version: '2'
+services:
+  restyaboard:
+    image: cangeli/docker-restyaboard:0.4.2
+    ports:
+      - 1234:80
+    volumes:
+       - /var/opt/restya/media:/usr/share/nginx/html/media
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=restyaboard
+    depends_on:
+      - postgres
+    restart: always
+  postgres:
+    image: postgres:9.6
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=restyaboard
+    restart: always
