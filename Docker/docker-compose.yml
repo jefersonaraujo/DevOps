@@ -1,0 +1,35 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: MySql
+    restart: unless-stopped
+    ports:
+    - 3306:3306
+    volumes:
+    - ./mysql5:/var/lib/mysql
+    env_file:
+    - ./envs/mysql.env
+
+  myadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: PhpMyAdmin
+    restart: unless-stopped
+    ports:
+    - 8090:80
+    env_file:
+    - ./envs/myadmin.env
+    depends_on:
+    - mysql
+
+  mssql:
+    image: mcr.microsoft.com/mssql/server
+    container_name: MsSql
+    ports:
+    - 1433:1433
+    env_file:
+    - ./envs/mssql.env
+    volumes:
+    - ./mssql/data:/var/opt/mssql/data
+    - ./mssql/log:/var/opt/mssql/log
+    - ./mssql/secrets:/var/opt/mssql/secrets
