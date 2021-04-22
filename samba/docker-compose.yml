@@ -1,6 +1,0 @@
-version: '1.8'
-volumes:
-  data:
-services:
-    app:
-    image: openshift/base-centos7
