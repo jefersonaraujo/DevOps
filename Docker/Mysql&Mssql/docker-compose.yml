@@ -16,7 +16,7 @@ services:
     container_name: PhpMyAdmin
     restart: unless-stopped
     ports:
-    - 8090:80
+    - 9090:80
     env_file:
     - ./envs/myadmin.env
     depends_on:
