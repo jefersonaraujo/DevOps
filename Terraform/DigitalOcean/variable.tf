@@ -27,3 +27,8 @@ variable "droplet_ssh_keys" {
   default     = ["27:51:6b:74:32:ff:2e:8a:d4:d7:ba:c7:f5:d3:1f:f9"]
 
 }
+
+variable "droplet_names" {
+  type    = list(string)
+  default = ["goku"]
+}

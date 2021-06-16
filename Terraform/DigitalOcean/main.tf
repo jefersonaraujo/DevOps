@@ -14,7 +14,7 @@ terraform {
 
 resource "digitalocean_droplet" "web" {
   image    = var.droplet_image
-  name     = "web-1"
+  name     = var.droplet_names[count.index]
   region   = var.droplet_region
   size     = var.droplet_size
   ssh_keys = var.droplet_ssh_keys
@@ -26,8 +26,6 @@ resource "digitalocean_droplet" "web" {
     ]
   }
 
-}
+  count = length(var.droplet_names)
 
-output "ip_do_droplet" {
-  value = digitalocean_droplet.web.ipv4_address
 }
