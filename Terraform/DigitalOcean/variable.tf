@@ -32,3 +32,9 @@ variable "droplet_names" {
   type    = list(string)
   default = ["goku"]
 }
+
+variable "private_key_path" {
+  type        = string
+  description = "Caminho para a chave"
+  default     = "/root/.ssh/id_rsa"
+}

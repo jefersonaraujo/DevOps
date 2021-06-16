@@ -1,9 +1,4 @@
-provider "digitalocean" {
-  token = var.do_token
-}
-
 variable "do_token" {}
-
 terraform {
   required_providers {
     digitalocean = {
@@ -11,7 +6,6 @@ terraform {
     }
   }
 }
-
 resource "digitalocean_droplet" "web" {
   image    = var.droplet_image
   name     = var.droplet_names[count.index]
@@ -24,6 +18,22 @@ resource "digitalocean_droplet" "web" {
     ignore_changes = [
       ssh_keys
     ]
+  }
+
+  provisioner "remote-exec" {
+    connection {
+      type        = "ssh"
+      user        = "root"
+      host        = digitalocean_droplet.web[count.index].ipv4_address
+      timeout     = "5m"
+      private_key = file(var.private_key_path)
+    }
+
+    inline = [
+      "curl -fsSL https://get.docker.com | sh",
+      "docker run -d -p 80:80 nginx"
+    ]
+
   }
 
   count = length(var.droplet_names)
