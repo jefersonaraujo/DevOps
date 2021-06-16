@@ -1,9 +1,20 @@
 # Docker
 ## Instalar
 ##### Instalando docker
-```shell
-curl -sSL https://get.docker.com | sh
-```
+    
+    
+    curl -fsSL https://get.docker.com | bash && \
+    sudo usermod -aG docker $USER
+  
+    + Docker Compose:
+ 
+    base=https://github.com/docker/compose/releases/download/1.25.1 && \
+    sudo curl -L $base/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose && \
+    sudo chmod +x /usr/local/bin/docker-compose
+  
+ 
+
+
 ## Comandos básicos
 ##### Baixar imagem
 ```shell
