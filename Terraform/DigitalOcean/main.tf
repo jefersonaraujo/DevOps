@@ -13,11 +13,11 @@ terraform {
 }
 
 resource "digitalocean_droplet" "web" {
-  image    = "ubuntu-20-04-x64"
+  image    = var.droplet_image
   name     = "web-1"
-  region   = "nyc1"
-  size     = "s-1vcpu-1gb"
-  ssh_keys = ["27:51:6b:74:32:ff:2e:8a:d4:d7:ba:c7:f5:d3:1f:f9"]
+  region   = var.droplet_region
+  size     = var.droplet_size
+  ssh_keys = var.droplet_ssh_keys
 
   lifecycle {
     create_before_destroy = true
