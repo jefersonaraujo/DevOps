@@ -30,11 +30,17 @@ variable "droplet_ssh_keys" {
 
 variable "droplet_names" {
   type    = list(string)
-  default = ["goku"]
+  default = ["terraform", "consul"]
 }
 
 variable "private_key_path" {
   type        = string
   description = "Caminho para a chave"
   default     = "/root/.ssh/id_rsa"
+}
+
+variable "lb" {
+  type        = string
+  description = "Nome do load balancer"
+  default     = "hashicorp"
 }

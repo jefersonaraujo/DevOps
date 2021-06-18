@@ -24,7 +24,7 @@ resource "digitalocean_droplet" "web" {
     connection {
       type        = "ssh"
       user        = "root"
-      host        = digitalocean_droplet.web[count.index].ipv4_address
+      host        = self.ipv4_address
       timeout     = "5m"
       private_key = file(var.private_key_path)
     }
@@ -38,4 +38,24 @@ resource "digitalocean_droplet" "web" {
 
   count = length(var.droplet_names)
 
+}
+
+resource "digitalocean_loadbalancer" "public" {
+  name   = "loadbalancer-1"
+  region = var.droplet_region
+
+  forwarding_rule {
+    entry_port     = 80
+    entry_protocol = "http"
+
+    target_port     = 80
+    target_protocol = "http"
+  }
+
+  healthcheck {
+    port     = 22
+    protocol = "tcp"
+  }
+
+  droplet_ids = digitalocean_droplet.web[*].id
 }
