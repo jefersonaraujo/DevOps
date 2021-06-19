@@ -82,3 +82,9 @@ variable "database_username" {
   default     = "irlanda"
   sensitive   = true
 }
+
+variable "firewall_name" {
+  type        = string
+  description = "Nome do fw"
+  default     = "braum"
+}
