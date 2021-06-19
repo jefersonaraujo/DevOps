@@ -88,3 +88,9 @@ variable "firewall_name" {
   description = "Nome do fw"
   default     = "braum"
 }
+
+variable "troubleshooting" {
+  type        = bool
+  description = "Liberar fw"
+  default     = true
+}
