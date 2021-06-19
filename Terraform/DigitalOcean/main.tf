@@ -20,42 +20,61 @@ resource "digitalocean_droplet" "web" {
     ]
   }
 
-  provisioner "remote-exec" {
-    connection {
-      type        = "ssh"
-      user        = "root"
-      host        = self.ipv4_address
-      timeout     = "5m"
-      private_key = file(var.private_key_path)
-    }
+  # provisioner "remote-exec" {
+  #   connection {
+  #     type        = "ssh"
+  #     user        = "root"
+  #     host        = self.ipv4_address
+  #     timeout     = "5m"
+  #     private_key = file(var.private_key_path)
+  #   }
 
-    inline = [
-      "curl -fsSL https://get.docker.com | sh",
-      "docker run -d -p 80:80 nginx"
-    ]
+  #   inline = [
+  #     "curl -fsSL https://get.docker.com | sh",
+  #     "docker run -d -p 80:80 nginx"
+  #   ]
 
-  }
+  # }
 
   count = length(var.droplet_names)
 
 }
 
-resource "digitalocean_loadbalancer" "public" {
-  name   = "loadbalancer-1"
-  region = var.droplet_region
+# resource "digitalocean_loadbalancer" "public" {
+#   name   = "loadbalancer-1"
+#   region = var.droplet_region
 
-  forwarding_rule {
-    entry_port     = 80
-    entry_protocol = "http"
+#   forwarding_rule {
+#     entry_port     = 80
+#     entry_protocol = "http"
 
-    target_port     = 80
-    target_protocol = "http"
-  }
+#     target_port     = 80
+#     target_protocol = "http"
+#   }
 
-  healthcheck {
-    port     = 22
-    protocol = "tcp"
-  }
+#   healthcheck {
+#     port     = 22
+#     protocol = "tcp"
+#   }
 
-  droplet_ids = digitalocean_droplet.web[*].id
+#   droplet_ids = digitalocean_droplet.web[*].id
+# }
+
+resource "digitalocean_database_cluster" "postgres" {
+  name       = var.pg_cluster_name
+  engine     = "pg"
+  version    = var.pg_cluster_version
+  size       = var.pg_cluster_size
+  region     = var.droplet_region
+  node_count = 1
+}
+
+resource "digitalocean_database_db" "database" {
+  cluster_id = digitalocean_database_cluster.postgres.id
+  name       = var.database_name
+}
+
+resource "digitalocean_database_user" "username" {
+  cluster_id = digitalocean_database_cluster.postgres.id
+  name       = var.database_username
 }

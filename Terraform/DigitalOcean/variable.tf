@@ -44,3 +44,41 @@ variable "lb" {
   description = "Nome do load balancer"
   default     = "hashicorp"
 }
+
+variable "pg_cluster_name" {
+  type        = string
+  description = "Nome cluster de pg. "
+  default     = "postgres-cluster"
+
+}
+
+variable "pg_cluster_version" {
+  type        = string
+  description = "Versão pg"
+  default     = "12"
+}
+
+variable "pg_cluster_size" {
+  type        = string
+  description = "Tamanho node pg"
+  default     = "db-s-1vcpu-1gb"
+}
+
+variable "pg_node_count" {
+  type        = number
+  description = "Numero de  nodes pg"
+  default     = 1
+}
+
+variable "database_name" {
+  type        = string
+  description = "Nome do banco de dados"
+  default     = "limerick"
+}
+
+variable "database_username" {
+  type        = string
+  description = "Nome do user banco de dados"
+  default     = "irlanda"
+  sensitive   = true
+}
