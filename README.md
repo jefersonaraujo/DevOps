@@ -124,6 +124,11 @@ root@docker:/home/docker# docker images
 REPOSITORY            TAG                 IMAGE ID            CREATED             SIZE
 debian-apache         latest              9a232ff09aaf        4 seconds ago       226.9 MB
 ```
+#### Docker build(criar imagem)
+```shell
+docker image build -t echo-container .
+```
+
 
 #### Docker Compose
 ```shell
