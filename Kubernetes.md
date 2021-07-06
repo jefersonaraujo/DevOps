@@ -15,3 +15,10 @@ mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
+##### Configuracoes Adicionais
+```shell
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+#Liberar master para rodar
+kubectl taint nodes --all node-role.kubernetes.io/master-
+```
+
