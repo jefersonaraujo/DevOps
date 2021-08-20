@@ -1,0 +1,51 @@
+stages:
+  - stage: stageA
+    displayName: Stage A
+    jobs:
+      - job: jobA1
+        displayName: Job Stage A 1
+        pool:
+          vmImage: 'windows-2019'
+      - job: jobA2
+        displayName: Job Stage A 2
+        pool:
+          vmImage: 'windows-2019'
+
+  - stage: stageB
+    displayName: Stage B
+    dependsOn: StageA
+    jobs:
+      - job: jobB1
+        displayName: Job Stage B 1
+        pool:
+          vmImage: 'windows-2019'
+      - job: jobB2
+        displayName: Job Stage B 2
+        pool:
+          vmImage: 'windows-2019'
+
+  - stage: stageC
+    displayName: Stage C 
+    dependsOn: StageB
+    jobs:
+      - job: jobC1
+        displayName: Job Stage C 1
+        pool:
+          vmImage: 'windows-2019'
+      - job: jobC2
+        displayName: Job Stage C 2
+        pool:
+          vmImage: 'windows-2019'
+
+  - stage: stageD
+    displayName: Stage D
+    dependsOn: StageB
+    jobs:
+      - job: jobD1
+        displayName: Job Stage D 1
+        pool:
+          vmImage: 'windows-2019'
+      - job: jobD2
+        displayName: Job Stage D 2
+        pool:
+          vmImage: 'windows-2019'
